@@ -1,28 +1,82 @@
-public class WeatherData {
+import interfaces.Observer;
+import interfaces.Subject;
 
-    private float temperature;
-    private float humidity;
-    private float pressure;
+import java.util.ArrayList;
+import java.util.Collection;
+
+public class WeatherData implements Subject {
+
+    private Float temperature;
+    private Float humidity;
+    private Float pressure;
+    private Collection<Observer> observers;
 
     public void measurementsChanged() {
-        float temp = getTemperature();
-        float humidity = getHumidity();
-        float pressure = getPressure();
-
-        currentConditionsDisplay.update(temp, humidity, pressure);
-        statisticsDisplay.update(temp, humidity, pressure);
-        forecastDisplay.update(temp, humidity, pressure);
+        notifyObservers();
     }
 
-    public float getTemperature() {
+    @Override
+    public void registerObserver(Observer o) {
+        setObserver(o);
+    }
+
+    @Override
+    public void removeObserver(Observer o) {
+        getObservers().remove(o);
+    }
+
+    @Override
+    public void notifyObservers() {
+        for (Observer observer : observers) {
+            observer.update(getTemperature(), getHumidity(), getPressure());
+        }
+    }
+
+    ///////////////////////////////////////
+
+    public Float getTemperature() {
         return temperature;
     }
 
-    public float getHumidity() {
+    public void setTemperature(Float temperature) {
+        this.temperature = temperature;
+    }
+
+    public Float getHumidity() {
         return humidity;
     }
 
-    public float getPressure() {
+    public void setHumidity(Float humidity) {
+        this.humidity = humidity;
+    }
+
+    public Float getPressure() {
         return pressure;
+    }
+
+    public void setPressure(Float pressure) {
+        this.pressure = pressure;
+    }
+
+    public Collection<Observer> getObservers() {
+        return observers;
+    }
+
+    public void setObservers(Collection<Observer> observers) {
+        this.observers = observers;
+    }
+
+    private void setObserver(Observer o) {
+        if (observers == null) {
+            observers = new ArrayList<>();
+        }
+        observers.add(o);
+    }
+
+    public void setMeasurements(Float temperature, Float humidity, Float pressure) {
+        setTemperature(temperature);
+        setHumidity(humidity);
+        setPressure(pressure);
+        measurementsChanged();
     }
 }
