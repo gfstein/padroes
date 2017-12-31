@@ -7,7 +7,7 @@ public class StatisticsDisplay extends Display {
     private Float maxTemp = 0.0F;
     private Float minTemp = 200F;
     private Float tempSum = 0.0F;
-    private Integer numReadings;
+    private Integer numReadings = 0;
 
     public StatisticsDisplay(Subject weatherData) {
         super(weatherData);
