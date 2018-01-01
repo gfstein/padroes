@@ -1,17 +1,17 @@
 package views;
 
-import interfaces.Subject;
+import java.util.Observable;
 
 public class CurrentConditionsDisplay extends Display {
 
-    public CurrentConditionsDisplay(Subject weatherData) {
+    public CurrentConditionsDisplay(Observable weatherData) {
         super(weatherData);
-        weatherData.registerObserver(this);
+        weatherData.addObserver(this);
     }
 
     @Override
-    public void update(Float temp, Float humidity, Float pressure) {
-        super.update(temp, humidity, pressure);
+    public void update(Observable o, Object arg) {
+        super.update(o, arg);
         display();
     }
 

@@ -1,23 +1,27 @@
 package views;
 
-import interfaces.Subject;
+import observable.WeatherData;
+
+import java.util.Observable;
 
 public class ForecastDisplay extends Display {
 
     private Float currentPressure = 29.92f;
     private Float lastPressure;
 
-    public ForecastDisplay(Subject weatherData) {
+    public ForecastDisplay(Observable weatherData) {
         super(weatherData);
-        weatherData.registerObserver(this);
+        weatherData.addObserver(this);
     }
 
     @Override
-    public void update(Float temp, Float humidity, Float pressure) {
-        super.update(temp, humidity, pressure);
-        lastPressure = currentPressure;
-        currentPressure = pressure;
-        display();
+    public void update(Observable o, Object arg) {
+        if (o instanceof WeatherData) {
+            WeatherData weatherData = (WeatherData) o;
+            lastPressure = currentPressure;
+            currentPressure = weatherData.getPressure();
+            display();
+        }
     }
 
     @Override

@@ -1,6 +1,8 @@
 package views;
 
-import interfaces.Subject;
+import observable.WeatherData;
+
+import java.util.Observable;
 
 public class StatisticsDisplay extends Display {
 
@@ -9,26 +11,28 @@ public class StatisticsDisplay extends Display {
     private Float tempSum = 0.0F;
     private Integer numReadings = 0;
 
-    public StatisticsDisplay(Subject weatherData) {
+    public StatisticsDisplay(Observable weatherData) {
         super(weatherData);
-        weatherData.registerObserver(this);
+        weatherData.addObserver(this);
     }
 
     @Override
-    public void update(Float temp, Float humidity, Float pressure) {
-        super.update(temp, humidity, pressure);
-        tempSum += temp;
-        numReadings++;
+    public void update(Observable o, Object arg) {
+        if (o instanceof WeatherData) {
+            Float temp = ((WeatherData) o).getTemperature();
+            tempSum += temp;
+            numReadings++;
 
-        if (temp > maxTemp) {
-            maxTemp = temp;
+            if (temp > maxTemp) {
+                maxTemp = temp;
+            }
+
+            if (temp < minTemp) {
+                minTemp = temp;
+            }
+
+            display();
         }
-
-        if (temp < minTemp) {
-            minTemp = temp;
-        }
-
-        display();
     }
 
     public void display() {

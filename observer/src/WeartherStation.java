@@ -1,3 +1,4 @@
+import observable.WeatherData;
 import views.*;
 
 public class WeartherStation {

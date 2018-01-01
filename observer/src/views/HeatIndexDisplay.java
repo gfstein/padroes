@@ -1,11 +1,11 @@
 package views;
 
-import interfaces.Subject;
+import java.util.Observable;
 
 public class HeatIndexDisplay extends Display {
-    public HeatIndexDisplay(Subject weatherData) {
+    public HeatIndexDisplay(Observable weatherData) {
         super(weatherData);
-        weatherData.registerObserver(this);
+        weatherData.addObserver(this);
     }
 
     @Override
@@ -14,8 +14,8 @@ public class HeatIndexDisplay extends Display {
     }
 
     @Override
-    public void update(Float temp, Float humidity, Float pressure) {
-        super.update(temp, humidity, pressure);
+    public void update(Observable o, Object arg) {
+        super.update(o, arg);
         display();
     }
 

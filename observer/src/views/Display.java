@@ -1,17 +1,19 @@
 package views;
 
 import interfaces.DisplayElement;
-import interfaces.Observer;
-import interfaces.Subject;
+import observable.WeatherData;
+
+import java.util.Observable;
+import java.util.Observer;
 
 public abstract class Display implements Observer, DisplayElement {
 
     private Float temperature;
     private Float humidity;
     private Float pressure;
-    private Subject weatherData;
+    private Observable weatherData;
 
-    public Display(Subject weatherData) {
+    public Display(Observable weatherData) {
         setWeatherData(weatherData);
     }
 
@@ -19,12 +21,14 @@ public abstract class Display implements Observer, DisplayElement {
     public abstract void display();
 
     @Override
-    public void update(Float temp, Float humidity, Float pressure) {
-        setTemperature(temp);
-        setHumidity(humidity);
-        setPressure(pressure);
+    public void update(Observable o, Object arg) {
+        if (o instanceof WeatherData) {
+            WeatherData weatherData = (WeatherData) o;
+            setPressure(weatherData.getPressure());
+            setHumidity(weatherData.getHumidity());
+            setTemperature(weatherData.getTemperature());
+        }
     }
-
 
     public Float getTemperature() {
         return temperature;
@@ -50,11 +54,11 @@ public abstract class Display implements Observer, DisplayElement {
         this.pressure = pressure;
     }
 
-    public Subject getWeatherData() {
+    public Observable getWeatherData() {
         return weatherData;
     }
 
-    public void setWeatherData(Subject weatherData) {
+    public void setWeatherData(Observable weatherData) {
         this.weatherData = weatherData;
     }
 }
