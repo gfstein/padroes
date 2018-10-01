@@ -2,11 +2,11 @@ package drinks;
 
 import java.math.BigDecimal;
 
-abstract class Beverage {
+public abstract class Beverage {
 
-    private String description;
+    private String description = "Unknown Beverage";
 
-    abstract BigDecimal coust();
+    public abstract BigDecimal cost();
 
     public String getDescription() {
         return description;

@@ -2,15 +2,14 @@ package drinks;
 
 import java.math.BigDecimal;
 
-public class HouseBlend extends Beverage {
+public class Decaf extends Beverage {
 
-    public HouseBlend() {
+    public Decaf() {
         setDescription(this.getClass().getSimpleName());
     }
 
     @Override
     public BigDecimal cost() {
-        return new BigDecimal(.89);
+        return new BigDecimal(.99);
     }
-
 }

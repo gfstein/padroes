@@ -4,9 +4,13 @@ import java.math.BigDecimal;
 
 public class DarkRoast extends Beverage {
 
+    public DarkRoast() {
+        setDescription(this.getClass().getSimpleName());
+    }
+
     @Override
-    BigDecimal coust() {
-        return new BigDecimal(1.10);
+    public BigDecimal cost() {
+        return new BigDecimal(.99);
     }
 
 }
