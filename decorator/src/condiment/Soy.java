@@ -14,7 +14,17 @@ public class Soy extends CondimentDecorator {
 
     @Override
     public BigDecimal cost() {
-        return new BigDecimal(.15).add(beverage.cost());
+        BigDecimal cost = beverage.cost();
+        switch (beverage.getSize()){
+            case TALL:
+                return cost.add(new BigDecimal(.10));
+            case GRANDE:
+                return cost.add(new BigDecimal(.15));
+            case VENTI:
+                return cost.add(new BigDecimal(.20));
+        }
+
+        return cost;
     }
 
     @Override
