@@ -1,12 +1,11 @@
 package store;
 
-import factory.SimplePizzaFactory;
 import model.Pizza;
 
-public class PizzaStore {
+public abstract class PizzaStore {
 
-    public Pizza orderPizza() {
-        Pizza pizza = SimplePizzaFactory.createPizza(Pizza.Type.CHEESE);
+    public Pizza orderPizza(Pizza.Type type) {
+        Pizza pizza = createPizza(type);
 
         pizza.prepare();
         pizza.bake();
@@ -14,6 +13,12 @@ public class PizzaStore {
         pizza.box();
 
         return pizza;
+    }
+
+    protected abstract Pizza createPizza(Pizza.Type type);
+
+    public enum Type{
+        NY, CH, CA
     }
 
 }

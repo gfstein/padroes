@@ -1,14 +1,36 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 public abstract class Pizza {
 
-    public abstract void prepare();
+    protected String name;
+    protected String dough;
+    protected String sauce;
+    protected Collection<String> toppings = new ArrayList<>();
 
-    public abstract void bake();
+    public void prepare() {
+        System.out.println("Preparing: " + name);
+        System.out.println("Tossing dough...");
+        System.out.println("Adding sauce...");
+        System.out.println("Adding toppings: ");
+        toppings.forEach(top -> {
+            System.out.println("   " + top);
+        });
+    }
 
-    public abstract void cut();
+    public void bake(){
+        System.out.println("Bake for 25 minutes at 350");
+    }
 
-    public abstract void box();
+    public void cut(){
+        System.out.println("Cutting the pizza into diagonal slices");
+    }
+
+    public void box(){
+        System.out.println("Place pizza in official PizzaStore box");
+    }
 
     @Override
     public String toString() {
@@ -19,4 +41,7 @@ public abstract class Pizza {
          CHEESE, GREEK, PEPPERONI, EMPTY
     }
 
+    public String getName() {
+        return name;
+    }
 }
