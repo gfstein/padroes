@@ -1,35 +1,22 @@
 package model;
 
-public class Pizza {
+public abstract class Pizza {
 
-    private String name;
+    public abstract void prepare();
 
-    public void prepare(){
-        System.out.println("Preparing pizza " + name);
-    }
+    public abstract void bake();
 
-    public void bake(){
-        System.out.println("baking pizza " + name);
-    }
+    public abstract void cut();
 
-    public void cut(){
-        System.out.println("cutting pizza " + name);
-    }
-
-    public void box(){
-        System.out.println("boxing pizza " + name);
-    }
+    public abstract void box();
 
     @Override
     public String toString() {
-        return "Pizza: " + name;
+        return "Pizza: " + this.getClass().getSimpleName();
     }
 
-    public String getName() {
-        return name;
+    public enum Type {
+         CHEESE, GREEK, PEPPERONI, EMPTY
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 }
