@@ -7,7 +7,7 @@ import model.ca.CAStylePepperoniPizza;
 
 public class CaliforniaPizzaStore extends PizzaStore {
     @Override
-    Pizza createPizza(Pizza.Type type) {
+    protected Pizza createPizza(Pizza.Type type) {
         switch (type){
             case CHEESE:
                 return new CAStyleCheesePizza();

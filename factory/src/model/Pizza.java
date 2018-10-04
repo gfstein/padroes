@@ -1,24 +1,20 @@
 package model;
 
-import java.util.ArrayList;
+import model.ingredients.*;
+
 import java.util.Collection;
 
 public abstract class Pizza {
 
     protected String name;
-    protected String dough;
-    protected String sauce;
-    protected Collection<String> toppings = new ArrayList<>();
+    protected Dough dough;
+    protected Sauce sauce;
+    protected Collection<Veggies> veggies;
+    protected Cheese cheese;
+    protected Pepperoni pepperoni;
+    protected Clam clam;
 
-    public void prepare() {
-        System.out.println("Preparing: " + name);
-        System.out.println("Tossing dough...");
-        System.out.println("Adding sauce...");
-        System.out.println("Adding toppings: ");
-        toppings.forEach(top -> {
-            System.out.println("   " + top);
-        });
-    }
+    public abstract void prepare();
 
     public void bake(){
         System.out.println("Bake for 25 minutes at 350");
@@ -43,5 +39,9 @@ public abstract class Pizza {
 
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

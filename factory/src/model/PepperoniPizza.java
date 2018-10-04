@@ -1,3 +1,8 @@
 package model;
 
-public class PepperoniPizza extends Pizza {}
+public class PepperoniPizza extends Pizza {
+    @Override
+    public void prepare() {
+
+    }
+}

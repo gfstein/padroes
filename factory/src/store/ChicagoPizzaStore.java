@@ -7,7 +7,7 @@ import model.ch.CHStylePepperoniPizza;
 
 public class ChicagoPizzaStore extends PizzaStore {
     @Override
-    Pizza createPizza(Pizza.Type type) {
+    protected Pizza createPizza(Pizza.Type type) {
         switch (type){
             case CHEESE:
                 return new CHStyleCheesePizza();

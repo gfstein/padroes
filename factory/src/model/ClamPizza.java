@@ -2,11 +2,11 @@ package model;
 
 import factory.PizzaIngredientFactory;
 
-public class CheesePizza extends Pizza {
+public class ClamPizza extends Pizza {
 
     private PizzaIngredientFactory factory;
 
-    public CheesePizza(PizzaIngredientFactory factory) {
+    public ClamPizza(PizzaIngredientFactory factory) {
         this.factory = factory;
     }
 
@@ -16,5 +16,6 @@ public class CheesePizza extends Pizza {
         dough = factory.createDough();
         sauce = factory.createSauce();
         cheese = factory.createCheese();
+        clam = factory.createClam();
     }
 }

@@ -17,6 +17,9 @@ public abstract class PizzaStore {
 
     protected abstract Pizza createPizza(Pizza.Type type);
 
+//    Could be here
+//    public static PizzaStore getStore(PizzaStore.Type type) {
+
     public enum Type{
         NY, CH, CA
     }
