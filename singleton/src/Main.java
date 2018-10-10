@@ -1,23 +1,26 @@
 public class Main {
 
     public static void main(String[] args) {
-        ChocolateBoiler chocolateBoiler = ChocolateBoiler.getInstance();
-        System.out.println(chocolateBoiler);
-        chocolateBoiler.fill();
-        System.out.println(chocolateBoiler);
-        chocolateBoiler.boil();
-        System.out.println(chocolateBoiler);
-        chocolateBoiler.drain();
-        System.out.println(chocolateBoiler);
 
-        ChocolateBoiler chocolateBoiler2 = ChocolateBoiler.getInstance();
-        System.out.println(chocolateBoiler);
-        chocolateBoiler2.fill();
-        System.out.println(chocolateBoiler);
-        chocolateBoiler2.boil();
-        System.out.println(chocolateBoiler);
-        chocolateBoiler2.drain();
-        System.out.println(chocolateBoiler);
+        Thread thread = new Thread(() -> {
+            ChocolateBoiler chocolateBoiler1 = ChocolateBoiler.getInstance();
+            System.out.println(chocolateBoiler1 + " - 1");
+            chocolateBoiler1.fill();
+            chocolateBoiler1.boil();
+            chocolateBoiler1.drain();
+        });
+
+        Thread thread1 = new Thread(() -> {
+            ChocolateBoiler chocolateBoiler1 = ChocolateBoiler.getInstance();
+            System.out.println(chocolateBoiler1 + " - 2");
+            chocolateBoiler1.fill();
+            chocolateBoiler1.boil();
+            chocolateBoiler1.drain();
+        });
+
+        thread.start();
+        thread1.start();
+
     }
 
 }

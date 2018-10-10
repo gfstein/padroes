@@ -2,16 +2,20 @@ public class ChocolateBoiler {
 
     private Boolean empty;
     private Boolean boiled;
-    private static ChocolateBoiler instance;
+    private volatile static ChocolateBoiler instance;
 
     private ChocolateBoiler() {
         this.empty = Boolean.TRUE;
         this.boiled = Boolean.FALSE;
     }
 
-    public static synchronized ChocolateBoiler getInstance(){
+    public static ChocolateBoiler getInstance(){
         if (instance == null) {
-            instance = new ChocolateBoiler();
+            synchronized (ChocolateBoiler.class) {
+                if (instance == null){
+                    instance = new ChocolateBoiler();
+                }
+            }
         }
 
         return instance;
@@ -19,6 +23,7 @@ public class ChocolateBoiler {
 
     public void fill(){
         if (isEmpty()){
+            System.out.println("fill");
             empty = Boolean.FALSE;
             boiled = Boolean.FALSE;
         }
@@ -26,12 +31,14 @@ public class ChocolateBoiler {
 
     public void drain(){
         if (!isEmpty() && isBoiled()){
+            System.out.println("drain");
             empty = Boolean.TRUE;
         }
     }
 
     public void boil(){
         if (!isEmpty() && !isBoiled()){
+            System.out.println("boil");
             boiled = Boolean.TRUE;
         }
     }
@@ -42,10 +49,5 @@ public class ChocolateBoiler {
 
     public Boolean isBoiled() {
         return boiled;
-    }
-
-    @Override
-    public String toString() {
-        return "Empty: " + empty + " - Boiled: " + boiled;
     }
 }
