@@ -1,14 +1,38 @@
-import commands.*;
-import model.GarageDoor;
-import model.Light;
+import commands.CeilingFanCommand;
+import commands.CeilingFanHighCommand;
+import commands.CeilingFanMediumCommand;
+import commands.CeilingFanOffCommand;
+import model.CeilingFan;
 import model.RemoteControl;
-import model.Stereo;
 
 import static model.RemoteControl.Slot;
 
 public class RemoteLoader {
 
     public static void main(String[] args) {
+        RemoteControl control = new RemoteControl();
+
+        CeilingFan ceilingFan = new CeilingFan("Living Room");
+
+        CeilingFanCommand fanMediumCommand = new CeilingFanMediumCommand(ceilingFan);
+        CeilingFanCommand fanHighCommand = new CeilingFanHighCommand(ceilingFan);
+        CeilingFanCommand fanOffCommand = new CeilingFanOffCommand(ceilingFan);
+
+        control.setCommand(Slot.slot1, fanMediumCommand, fanOffCommand);
+        control.setCommand(Slot.slot2, fanHighCommand, fanOffCommand);
+
+        control.onButtonWasPushed(Slot.slot1);
+        control.offButtonWasPushed(Slot.slot1);
+        System.out.println(control);
+        control.undoCommandWasPushed();
+
+        control.onButtonWasPushed(Slot.slot2);
+        System.out.println(control);
+        control.undoCommandWasPushed();
+
+    }
+
+    /*public static void main(String[] args) {
         RemoteControl control = new RemoteControl();
 
         Light light = new Light();
@@ -43,6 +67,6 @@ public class RemoteLoader {
         System.out.println(control);
         control.undoCommandWasPushed();
 
-    }
+    }*/
 
 }
